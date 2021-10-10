@@ -14,7 +14,6 @@
         </div>
         <div id="tlbox">
             <ul id="timeline"></ul>
-
         </div>
         <script>
             'use strict';            
@@ -25,7 +24,38 @@
             sent.onclick=function sentmsg(){
 
                 var ms=msg.value;
+                
                 console.log(ms);
+
+                var n=tl.childElementCount;
+
+                switch(ms){
+                    case '':
+                    break;
+
+                    default:
+
+                    switch(n){
+                        case '':
+                        n=1
+                        break;
+                        default:
+
+                        n=n+1;
+                    }
+                    console.log(n);
+                    const box=document.createElement('li');
+
+                    tl.appendChild(box);
+
+                    box.id='msg'+n;
+
+                    const a=document.getElementById('msg'+n);
+
+                    a.style.listStyleType='none';
+
+                    a.innerHTML=ms;
+                }
             }
 
         </script>
