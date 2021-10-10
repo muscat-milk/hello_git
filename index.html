@@ -17,8 +17,17 @@
 
         </div>
         <script>
+            'use script';            
+            const msg=document.getElementById('msgbox');
+            const sent=document.getElementById('sentbtn');
+            const tl=document.getElementById('timeline');
 
-            'use script';
+            sent.onclick=function sentmsg(){
+
+                var ms=msg.value;
+                console.log(ms);
+            }
+
         </script>
     </body>
 </html>
