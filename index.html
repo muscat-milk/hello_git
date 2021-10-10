@@ -1,65 +1,97 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>掲示板ふう</title>
-        <style></style>
-    </head>
-    <body>
-        いんでっくす
-        <div>
-            <h1>掲示板</h1>
-            <input type="text" id="msgbox">
-            <input type="submit" id="sentbtn">
-        </div>
-        <div id="tlbox">
-            <ul id="timeline"></ul>
-        </div>
-        <script>
-            'use strict';            
-            const msg=document.getElementById('msgbox');
-            const sent=document.getElementById('sentbtn');
-            const tl=document.getElementById('timeline');
+  <head>
+    <meta charset="utf-8">
+    <title>掲示板</title>
+    <style>
 
-            sent.onclick=function sentmsg(){
+    </style>
+  </head>
+  <body>
 
-                var ms=msg.value;
-                
-                console.log(ms);
+    <div id="form">
+      <h1>掲示板</h1>
+      <input type="text" id="msgbox">
+      <input type="submit" id="sentbtn">
+      <div id="time"></div><!--時間を表示するところ-->
+    </div>
 
-                var n=tl.childElementCount;
+    <div id="tlbox">
+      <ul id="timeline">
 
-                switch(ms){
-                    case '':
-                    break;
+      </ul>
+    </div>
 
-                    default:
+    <script>
+      'use strict';
 
-                    switch(n){
-                        case '':
-                        n=1
-                        break;
-                        default:
+      const msg=document.getElementById('msgbox');
+      const sent=document.getElementById('sentbtn');
+      const tl=document.getElementById('timeline');
+      const time=document.getElementById('time');/*id=timeを取得する*/
 
-                        n=n+1;
-                    }
-                    console.log(n);
-                    const box=document.createElement('li');
+      function timer(){
+          var nowTime=new Date();//現在日時
+          var year=nowTime.getFullYear();//nowTimeから年を取得
+          var month=nowTime.getMonth();//現在の月
+          var date=nowTime.getDate();//現在の日
+          var hour=nowTime.getHours();//現在の時間
+          var nowmin=nowTime.getMinutes();//現在の時
+          var nowsec=nowTime.getSeconds();//現在の分
 
-                    tl.appendChild(box);
+          month=month+1;
 
-                    box.id='msg'+n;
+          var now=year+'/'+month+'/'+date+' '+hour+':'+nowmin+':'+nowsec;
+          console.log(now);
 
-                    const a=document.getElementById('msg'+n);
+          time.innerHTML=now;
+              }
+        setInterval('timer()',1000);
 
-                    a.style.listStyleType='none';
+      sent.onclick=function sentmsg(){
 
-                    a.innerHTML=n+'&'+ms;
+        var ms=msg.value;
 
-                    msg.value='';
-                }
-            }
+        console.log(ms);
 
-        </script>
-    </body>
+        var n=tl.childElementCount;
+
+        switch(ms){
+          case '':
+          break;
+
+          default:
+
+          switch(n){
+            case '':
+            n=1
+            break;
+            default:
+
+            n=n+1;
+          }
+
+          console.log(n);
+          const box=document.createElement('li');
+
+          tl.appendChild(box);
+
+          box.id='msg'+n;
+
+          const a=document.getElementById('msg'+n);
+
+          a.style.listStyleType='none';
+
+          a.innerHTML=n+'.'+ms;
+
+          msg.value='';
+
+        }
+
+      }
+
+
+    </script>
+
+  </body>
 </html>
